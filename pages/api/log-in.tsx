@@ -1,22 +1,39 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from "next";
+import { withIronSession } from 'next-iron-session';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { username, password } = req.body;
 
-    const user = await prisma.user.findUnique({
-      where: { username },
-    });
+    // console.log(username, password)
 
-    if (!user || user.password !== password) {
+    const users = await prisma.user.findMany({
+        where: { name : username },
+    })
+
+    // console.log(users)
+
+    if (!users[0] || users[0].password !== password) {
+        console.log("Something went wrong")
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    res.status(200).json({ message: 'Logged in', user });
+    req.session.set('user', { email: users[0].email });
+    await req.session.save();
+
+    res.status(200).json({ message: 'Logged in', users });
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
-}
+};
+
+export default withIronSession(handler, {
+    password: "apslfjguenmdksjflsnq249567ajsnfgmskd",
+    cookieName: 'my-session-cookie',
+    cookieOptions: {
+      secure: process.env.NODE_ENV === 'production',
+    },
+  });
