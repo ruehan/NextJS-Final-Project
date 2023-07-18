@@ -42,7 +42,7 @@ const CreateTweetPage = () => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center ">
-        <div className="max-w-2xl h-5/6 flex-1 border-solid border-2 border-indigo-600 rounded-2xl relative">
+        <div className="max-w-xl h-5/6 flex-1 shadow-2xl rounded-2xl relative">
       <h1 className=" text-center text-2xl mt-4">Create Tweet</h1>
       {user && (
         <form onSubmit={handleSubmit}>
@@ -52,7 +52,7 @@ const CreateTweetPage = () => {
             placeholder="What's happening?"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full h-96 mt-4 rounded-2xl border-solid border-2 border-black"
+            className="w-full h-96 mt-4 p-4 rounded-2xl border-solid border-2 border-black"
           />
           <button type="submit">Tweet</button>
           </div>
