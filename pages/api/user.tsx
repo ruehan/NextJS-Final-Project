@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const sessionUser = req.session.get('user');
 
-  console.log(sessionUser)
+  // console.log(sessionUser)
 
   if (!sessionUser) {
     return res.status(401).json({ message: 'Unauthorized' });

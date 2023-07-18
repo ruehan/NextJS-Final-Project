@@ -4,7 +4,10 @@ import useSWR from "swr";
 
 const Home = () => {
   const router = useRouter();
+
   const { data: user, error: userError } = useSWR('/api/user');
+
+  console.log(user, userError)
 
   useEffect(() => {
     if (userError) {
@@ -21,7 +24,12 @@ const Home = () => {
     return <div>Loading...</div>;
   }
 
-  return <div>Welcome to the home page!</div>; 
+  return (
+    <>
+      <div>안녕하세요! {user.user.name}님</div>
+      <a href="/create-tweet">+</a>
+    </>
+  ) 
 
 };
 

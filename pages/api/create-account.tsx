@@ -15,7 +15,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         password:password },
     });
 
-    req.session.set('user', { email: user.email });
+    req.session.set('user', { email: user.email, name: user.name });
     await req.session.save();
 
     res.status(200).json({ message: 'Account created', user });

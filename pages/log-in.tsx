@@ -9,6 +9,8 @@ const LogInPage = () => {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
+    console.log(username, password)
+
     const response = await fetch('/api/log-in', {
       method: 'POST',
       body: JSON.stringify({ username, password }),

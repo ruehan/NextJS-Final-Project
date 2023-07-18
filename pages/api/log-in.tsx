@@ -15,13 +15,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     })
 
     // console.log(users)
-
+    
     if (!users[0] || users[0].password !== password) {
         console.log("Something went wrong")
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    req.session.set('user', { email: users[0].email });
+    req.session.set('user', { email: users[0].email, name: users[0].name });
     await req.session.save();
 
     res.status(200).json({ message: 'Logged in', users });
