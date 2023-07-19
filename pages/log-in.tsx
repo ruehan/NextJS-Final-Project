@@ -26,39 +26,56 @@ const LogInPage = () => {
     }
   };
 
+  const onClick = () => {
+    router.push('/create-account');
+  };
+
   return (
-    <div className="w-full h-screen flex items-center justify-center ">
-        <div className="max-w-2xl h-5/6 flex-1 border-solid border-2 border-indigo-600 rounded-2xl bg-black relative">
-          <h1 className="text-white text-center text-2xl mt-4">Log In</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col w-10/12 justify-center items-center self-center ml-14">
-              <input
+    <div className="w-full h-screen grid grid-cols-2">
+        <div className="bg-[url('https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png')]"></div>
+        <div className="flex flex-col w-full h-screen justify-center p-8">
+            <div>
+                <div className="text-6xl font-bold mb-16">Happening now</div>
+                <div className="text-2xl font-bold">Join Twitter today.</div>
+            </div>
+            <div>
+            <form onSubmit={handleSubmit}>
+        <div className="flex flex-col w-full items-start ">
+        <input
                 type="text"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-3/4 h-12 mt-4 rounded-2xl"
+                className="w-1/3 h-12 mt-4 rounded-3xl border-2 border-gray-300"
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-3/4 h-12 mt-4 rounded-2xl"
+                className="w-1/3 h-12 mt-4 rounded-3xl border-2 border-gray-300"
               />
-              <button type="submit" className="bg-white mt-4 rounded-2xl w-1/4 h-12 text-xl">로그인</button>
-
-              <div className="text-white flex mt-12">
-                <p>계정이 없으세요?</p>
-                <a href="/create-account" className="text-blue-500 ml-2">회원가입하기</a>
+        
+        <button type="submit" className="bg-blue-500 text-white mt-4 rounded-3xl w-1/3 h-12 text-md border-2 border-gray-300">Sign in</button>
+        
+        <div className="flex-1 mt-12 w-full">
+                <p>Don't have an account?</p>
+                {/* <a href="/log-in" className="text-blue-500 ml-2">로그인하기</a> */}
+                <input
+                  type="button"
+                  value="Create Account"
+                  onClick={onClick}
+                  className="w-1/3 h-12 mt-4 rounded-3xl border-2 border-gray-300 text-blue-500"
+                />
               </div>
+        </div>
+      </form>
             </div>
-            
-            
-          </form>
-          
-      </div>
+        </div>
+        
     </div>
+
+   
   );
 };
 
