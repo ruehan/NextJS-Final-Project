@@ -6,9 +6,11 @@ const prisma = new PrismaClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
-  // console.log(sessionUser)
+//   console.log(sessionUser)
 
-  const tweets = await prisma.tweet.findMany();
+  const tweets = (await prisma.tweet.findMany()).reverse();
+
+  console.log(tweets)
 
   res.status(200).json({ message: "find tweets", tweets });
 
