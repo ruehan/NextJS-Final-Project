@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
+import Layout from './layout/MenuLayout';
 
 const CreateTweetPage = () => {
   const [content, setContent] = useState('');
@@ -44,40 +45,20 @@ const CreateTweetPage = () => {
   return (
 
     <div className="w-full h-screen grid grid-cols-3">
-        <div className="border-r-2 border-gray flex flex-col items-end">
-        <input
-          type="button"
-          value="Home"
-          onClick={() => router.push('/')}
-          className="w-2/5 h-12 mt-4 rounded-3xl mr-12 font-bold text-2xl"
-        />
-        <input
-          type="button"
-          value="Profile"
-          onClick={() => router.push(`/profile/${user.user.name}`)}
-          className="w-2/5 h-12 mt-4 rounded-3xl mr-12 font-bold text-2xl"
-        />
-        <input
-          type="button"
-          value="Tweet"
-          onClick={() => router.push('/create-tweet')}
-          className="w-2/5 h-12 mt-4 rounded-3xl border-2 border-gray-300 text-white bg-blue-500 mr-12"
-        />
-        </div>
+        <Layout />
         <div className="border-r-2 border-gray border-b-2">
           <div className="">
             <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24">Tweet</h1>
             {user && (
               <form onSubmit={handleSubmit}>
-                  <div>{user.user.name}</div>
-                <div className="flex flex-col w-10/12 h-max justify-center items-center self-center ml-14">
+                <div className="flex flex-col w-10/12 h-max justify-center items-center self-center ml-14 rounded-3xl pb-8 shadow-md">
                 <textarea
                   placeholder="What's happening?"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="w-full h-96 mt-4 p-4 rounded-2xl border-solid border-2 border-black"
+                  className="w-5/6 h-96 mt-4 p-4 rounded-2xl"
                 />
-                <button type="submit">Tweet</button>
+                <button type="submit" className="bg-blue-300 font-bold w-24 h-8 rounded-3xl text-white mt-4">Tweet</button>
                 </div>
               </form>
             )}

@@ -2,7 +2,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
-import CreateTweetPage from "./create-tweet";
+import Layout from "./layout/MenuLayout";
 
 const Home = () => {
   const router = useRouter();
@@ -10,8 +10,6 @@ const Home = () => {
   const { data: user, error: userError } = useSWR('/api/user');
 
   const { data: tweet, error: tweetError } = useSWR(`/api/tweet`);
-
-  const [showModal, setShowModal] = useState(false);
 
   function unix_timestamp(t: string){  
     return moment(t).format('YYYY-MM-DD HH:mm:ss')
@@ -38,28 +36,8 @@ const Home = () => {
 
   return (
     <>
-
       <div className="w-full h-screen grid grid-cols-3">
-        <div className="border-r-2 border-gray flex flex-col items-end">
-        <input
-          type="button"
-          value="Home"
-          onClick={() => router.push('/')}
-          className="w-2/5 h-12 mt-4 rounded-3xl mr-12 font-bold text-2xl"
-        />
-        <input
-          type="button"
-          value="Profile"
-          onClick={() => router.push(`/profile/${user.user.name}`)}
-          className="w-2/5 h-12 mt-4 rounded-3xl mr-12 font-bold text-2xl"
-        />
-        <input
-          type="button"
-          value="Tweet"
-          onClick={() => router.push('/create-tweet')}
-          className="w-2/5 h-12 mt-4 rounded-3xl border-2 border-gray-300 text-white bg-blue-500 mr-12"
-        />
-        </div>
+        <Layout />
         <div className="border-r-2 border-gray overflow-scroll scrollbar-hide border-b-2">
           <div className="">
             <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24">Home</h1>
