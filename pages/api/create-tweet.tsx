@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const sessionUser = req.session.get('user');
 
-  console.log(sessionUser)
+  // console.log(sessionUser)
 
   if (!sessionUser) {
     return res.status(401).json({ message: 'Unauthorized' });
@@ -25,11 +25,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     });
 
-    // const like = await prisma.like.create({
-    //     data: {
-    //         id: 
-    //     }
-    // })
+    
+
+    const tweetData = await prisma.tweet.findMany({
+      where: { authorId: authorId },
+    });
+
+    tweetData.reverse()
+
 
     res.status(200).json({ message: 'Tweet created', tweet });
   } else {
