@@ -56,31 +56,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   ))
 
-  // console.log(likes)
-
-  // await prisma.like.deleteMany({
-  //   where: {
-  //     name: {
-  //       equals: "admin"
-  //     }
-  //   }
-  // })
-
-  // await prisma.like.deleteMany({
-  //   where: {
-  //     name: {
-  //       equals: "test"
-  //     }
-  //   }
-  // })
+  const likesData = (await prisma.like.findMany(
+    {}
+  ))
 
   let i = 0
+  let likedUser: string[] = []
+
 
   likes.map((like) => {
     for(i = 0; i < tweets.length; i++){
       if(like.tweetId === tweets[i].id){
         tweets[i]['isLiked'] = like.isLiked
       }
+    }
+  }
+  )
+
+  likesData.map((like) => {
+    for(i = 0; i < tweets.length; i++){
+      if(like.tweetId === tweets[i].id){
+        if(like.isLiked === true){
+          likedUser.push(like.name)
+          
+        }
+      }
+      tweets[i]['likedUser'] = likedUser
     }
   }
   )
