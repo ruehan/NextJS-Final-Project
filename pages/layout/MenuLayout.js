@@ -10,6 +10,10 @@ const MenuLayout = () => {
     const { data: user } = useSWR('/api/user');
 
 
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="border-r-2 border-gray flex flex-col items-end relative">
         <input
