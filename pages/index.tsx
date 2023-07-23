@@ -12,9 +12,6 @@ const Home = () => {
 
   const { data: tweet, error: tweetError, mutate: tweetMutate } = useSWR(`/api/tweet`);
 
-  // const { data: liked, error: likedError } = useSWR(`/api/like`);
-
-
   const handleTweetClick = (id: number) => {
       router.push(`/tweet/${id}`)
   }
@@ -35,8 +32,10 @@ const Home = () => {
 
   const clickLike = async (e) => {
 
+    console.log(e.target)
+    console.log(e.target.id)
+
     if (!tweet) return;
-    // tweetMutate(...tweet, tweet.tweets, [...tweet.tweets, {isLiked: true}], false)
 
     await requestUpdate(e.target.id)
     
@@ -80,9 +79,11 @@ const Home = () => {
                   <div className="text-gray-400 text-sm ml-4" >{unix_timestamp(tweet.createdAt)}</div>
                 </div>
                 <div className="pl-8 pr-8 pb-8 hover:bg-gray:100 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
-                <div onClick={clickLike} id={tweet.id}>
-                  {tweet.isLiked ? <AiFillHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer" /> :
-                  <AiOutlineHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer" />}
+                <div className="relative flex">
+                  <div className="absolute w-12 h-12 left-8 bottom-2 z-30 " onClick={clickLike} id={tweet.id}></div>
+                  {tweet.isLiked ? <AiFillHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer z-0" /> :
+                  <AiOutlineHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer z-0" />}
+                  <div className="ml-4 text-gray-500">{tweet.likedUser.join(", ")}</div>
                 </div>
               </div>
             ))}
