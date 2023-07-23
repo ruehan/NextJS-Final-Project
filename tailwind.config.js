@@ -7,6 +7,11 @@ module.exports = {
     extend: {
       backgroundImage: {
         'main-image' : "url('https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png')",
+      },
+      fontFamily: {
+        Lugrasimo: ["Lugrasimo", "cursive"],
+        Mynerve: ["Mynerve", "cursive"],
+        Mugung: ["Mugung", "cursive"],
       }
     }
   },
