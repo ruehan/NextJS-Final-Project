@@ -4,11 +4,13 @@ import useSWR, { mutate } from 'swr';
 import Layout from '../layout/MenuLayout';
 import moment from 'moment';
 import { useState } from 'react';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const TweetPage = () => {
   const router = useRouter();
   const { id } = router.query;
-//   console.log(id)
+  const MySwal = withReactContent(Swal)
   const { data: tweet, error: tweetError } = useSWR(`/api/tweet/${id}`);
   const { data: replies, error: replyError } = useSWR(`/api/reply/${id}`);
 
@@ -37,10 +39,14 @@ const TweetPage = () => {
       },
     });
 
+    
+    MySwal.fire({
+      title: '댓글을 작성했습니다.',
+    })
+
     setReply("")
 
     mutate(`/api/reply/${id}`)
-    // router.push(`/tweet/${id}`)
   }
 
   if(!replies) {
