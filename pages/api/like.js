@@ -4,9 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-
-//   const tweets = (await prisma.tweet.findMany()).reverse();
+const handler = async (req, res) => {
 
     const userSession = req.session.get("user")
 
@@ -33,8 +31,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if(req.method == "GET"){
         console.log("Mutate")
     }
-
-
 
   res.status(200).json({ message: "change heart", like });
 

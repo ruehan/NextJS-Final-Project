@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req, res) => {
   const sessionUser = req.session.get('user');
 
   // console.log(sessionUser)
@@ -32,6 +32,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     tweetData.reverse()
+
+    
 
 
     res.status(200).json({ message: 'Tweet created', tweet });

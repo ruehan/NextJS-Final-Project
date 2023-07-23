@@ -5,7 +5,7 @@ import { AiTwotoneSecurityScan } from 'react-icons/ai';
 
 const prisma = new PrismaClient();
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req, res) => {
 
   const sessionUser = req.session.get('user');
 
@@ -13,12 +13,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const tweets = (await prisma.tweet.findMany()).reverse();
 
-
-
   const userData = await prisma.user.findMany({
   })
 
-  const usernameData: string[] = []
+  const usernameData = []
 
   userData.map((user) => {
     usernameData.push(user.name)
@@ -61,7 +59,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   ))
 
   let i = 0
-  let likedUser: string[] = []
+  let likedUser = []
 
 
   likes.map((like) => {

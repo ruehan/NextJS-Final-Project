@@ -4,11 +4,10 @@ import { withIronSession } from 'next-iron-session';
 
 const prisma = new PrismaClient();
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req, res) {
   if (req.method === 'POST') {
     const { username, password } = req.body;
 
-    // console.log(username, password)
 
     const users = await prisma.user.findMany({
         where: { name : username },
@@ -23,6 +22,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     req.session.set('user', { email: users[0].email, name: users[0].name });
     await req.session.save();
+
+    // req.session.destory()
 
     res.status(200).json({ message: 'Logged in', users });
   } else {

@@ -14,7 +14,7 @@ const CreateTweetPage = () => {
 
   console.log(user)
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (extend) => {
     e.preventDefault();
 
     if (!user) {
@@ -63,9 +63,9 @@ const CreateTweetPage = () => {
                   placeholder="What's happening?"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="w-5/6 h-96 mt-4 p-4 rounded-2xl"
+                  className="w-5/6 h-96 mt-4 p-4 rounded-2xl font-Mugung text-2xl font-bold"
                 />
-                <button type="submit" className="bg-blue-300 font-bold w-24 h-8 rounded-3xl text-white mt-4">Tweet</button>
+                <button type="submit" className="bg-blue-300 font-bold w-24 h-8 rounded-3xl text-white mt-4 font-Mugung text-3xl">Tweet</button>
                 </div>
               </form>
             )}

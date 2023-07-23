@@ -10,7 +10,7 @@ const LogInPage = () => {
 
   const MySwal = withReactContent(Swal)
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log(username, password)

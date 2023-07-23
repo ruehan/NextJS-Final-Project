@@ -17,11 +17,11 @@ const Home = () => {
 
   const { data: tweet, error: tweetError, mutate: tweetMutate } = useSWR(`/api/tweet`);
 
-  const handleTweetClick = (id: number) => {
+  const handleTweetClick = (id) => {
       router.push(`/tweet/${id}`)
   }
 
-  function unix_timestamp(t: string){  
+  function unix_timestamp(t){  
     return moment(t).format('YYYY-MM-DD HH:mm:ss')
   }
 
@@ -76,9 +76,9 @@ const Home = () => {
         <Layout />
         <div className="border-r-2 border-gray overflow-scroll scrollbar-hide border-b-2">
           <div className="">
-            <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24">Home</h1>
+            <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24 font-Mynerve">Home</h1>
             
-            {tweet.tweets.map((tweet: any) => (
+            {tweet.tweets.map((tweet) => (
               <div className="flex flex-col border-t-2 border-b-2 border-gray-100 hover:bg-gray-100 duration-300"  >
                 <div className="flex p-8 items-center" >
                   <div className="w-12 h-12 bg-[url('https://nomadcoders.co/m.svg')] bg-orange-200 bg-cover rounded-full border-2 border-white" ></div>
@@ -86,9 +86,9 @@ const Home = () => {
                   <div className="text-gray-400 text-sm ml-4" >{unix_timestamp(tweet.createdAt)}</div>
                 </div>
                 <div className="white-space: pre-wrap; pl-8 pr-8 pb-8 hover:bg-gray:100  relative"  >
-                  <div className="w-full z-30 absolute opacity-0 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
-                  {tweet.content.split("\n").map((line: string) => (
-                    <span className="z-0">
+                  <div className="w-full z-30 absolute opacity-0 cursor-pointer " id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
+                  {tweet.content.split("\n").map((line) => (
+                    <span className="z-0 font-Mugung text-2xl font-bold">
                     {line}
                     <br />
                   </span>

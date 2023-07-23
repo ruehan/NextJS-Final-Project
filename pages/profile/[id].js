@@ -21,7 +21,7 @@ const ProfilePage = () => {
     router.push('/log-in');
   }
 
-  function unix_timestamp(t: string){  
+  function unix_timestamp(t){  
     return moment(t).format('YYYY-MM-DD HH:mm:ss')
   }
 
@@ -48,7 +48,7 @@ const ProfilePage = () => {
     mutate('/api/tweet')  
   }
 
-  const handleTweetClick = (id: number) => {
+  const handleTweetClick = (id) => {
     router.push(`/tweet/${id}`)
 }
 
@@ -57,7 +57,7 @@ const ProfilePage = () => {
       <div className="w-full h-screen grid grid-cols-3">
         <Layout />
         <div className="border-r-2 border-gray overflow-scroll scrollbar-hide border-b-2">
-          <div className="relative">
+          <div className="relative  font-Mynerve">
             <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24">{user.user.name.toUpperCase()}</h1>  
             <div className="w-full h-40 bg-gray-200 "></div>     
             <div className="h-32 w-32 bg-orange-200 bg-[url('https://nomadcoders.co/m.svg')] bg-cover rounded-full -mt-16 ml-4 border-2 border-white"></div>       
@@ -71,10 +71,10 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-4 ">
-            <div className="font-bold text-xl ">{user.user.name.toUpperCase()}</div>
-            <div className="text-sm text-gray-600">{user.user.email.toUpperCase()}</div>
+            <div className="font-bold text-xl  font-Mynerve">{user.user.name.toUpperCase()}</div>
+            <div className="text-sm text-gray-600 font-Mynerve">{user.user.email.toUpperCase()}</div>
             {
-              tweet && tweet.tweets.map((tweet: any) => (
+              tweet && tweet.tweets.map((tweet) => (
                 tweet.authorId === user.user.name && (
                   <div className="flex flex-col border-t-2 border-b-2 border-gray-100">
                   <div className="flex p-8 items-center" >
@@ -84,8 +84,8 @@ const ProfilePage = () => {
                   </div>
                   <div className="white-space: pre-wrap; pl-8 pr-8 pb-8 hover:bg-gray:100  relative"  >
                   <div className="w-full z-30 absolute opacity-0 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
-                  {tweet.content.split("\n").map((line: string) => (
-                    <span className="z-0">
+                  {tweet.content.split("\n").map((line) => (
+                    <span className="z-0 font-Mugung text-2xl font-bold">
                     {line}
                     <br />
                   </span>

@@ -11,7 +11,7 @@ const CreateAccountPage = () => {
 
   const MySwal = withReactContent(Swal)
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (extend) => {
     e.preventDefault();
 
     // Perform account creation logic

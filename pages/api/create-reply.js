@@ -1,11 +1,12 @@
+// pages/api/tweet.js
+
 import { withIronSession } from 'next-iron-session';
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-
+const handler = async (req, res) => {
   const sessionUser = req.session.get('user');
 
   // console.log(sessionUser)
@@ -14,15 +15,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  const user = await prisma.user.findUnique({
-    where: { email: sessionUser.email },
-  });
+  if (req.method === 'POST') {
+    const { id, reply } = req.body;
 
-  if (!user) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    const createReply = await prisma.reply.create({
+      data: { 
+        tweetId : Number(id), 
+        content : reply,
+        authorId : "1",
+        name: sessionUser.name 
+    },
+    });
+
+
+    res.status(200).json({ message: 'Tweet created' });
+  } else {
+    res.status(405).json({ message: 'Method Not Allowed' });
   }
-
-  res.status(200).json({ isLoggedIn: true, user });
 };
 
 export default withIronSession(handler, {
