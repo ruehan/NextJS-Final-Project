@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const LogInPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+
+  const MySwal = withReactContent(Swal)
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -20,10 +24,20 @@ const LogInPage = () => {
     });
 
     if (response.ok) {
-      alert("로그인 성공")
+
+      MySwal.fire({
+        title: '로그인 성공.',
+      })
+
+      
       router.push('/');
     } else {
-      alert("아이디 또는 비밀번호 오류")
+
+      MySwal.fire({
+        title: '아이디 또는 비밀번호가 일치하지 않습니다.',
+      })
+
+      
       console.error('Failed to log in');
     }
   };
@@ -62,7 +76,6 @@ const LogInPage = () => {
         
         <div className="flex-1 mt-12 w-full">
                 <p>Don't have an account?</p>
-                {/* <a href="/log-in" className="text-blue-500 ml-2">로그인하기</a> */}
                 <input
                   type="button"
                   value="Create Account"

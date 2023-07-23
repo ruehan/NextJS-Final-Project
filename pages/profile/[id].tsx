@@ -4,14 +4,20 @@ import useSWR, { mutate } from 'swr';
 import Layout from '../layout/MenuLayout';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import moment from 'moment';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const ProfilePage = () => {
   const router = useRouter();
   const { data: user, error: userError } = useSWR('/api/user');
-
   const { data: tweet, error: tweetError } = useSWR(`/api/tweet`);
 
+  const MySwal = withReactContent(Swal)
+
   const clickLogout = () => {
+    MySwal.fire({
+      title: '로그아웃 했습니다.',
+    })
     router.push('/log-in');
   }
 

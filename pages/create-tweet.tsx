@@ -3,11 +3,14 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWR, { mutate } from 'swr';
 import Layout from './layout/MenuLayout';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const CreateTweetPage = () => {
   const [content, setContent] = useState('');
   const router = useRouter();
   const { data: user } = useSWR('/api/user');
+  const MySwal = withReactContent(Swal)
 
   console.log(user)
 
@@ -33,9 +36,13 @@ const CreateTweetPage = () => {
         },
       });
 
-      mutate('/api/user'); // Refresh user data
-      setContent(''); // Clear input field
-      router.push('/'); // Redirect to home page
+      MySwal.fire({
+        title: '트윗을 작성했습니다.',
+      })
+
+      mutate('/api/user'); 
+      setContent(''); 
+      router.push('/');
     } catch (error) {
       console.error('Error creating tweet:', error);
     }

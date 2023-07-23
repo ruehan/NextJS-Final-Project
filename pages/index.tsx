@@ -4,16 +4,20 @@ import React, { useEffect, useState } from "react";
 import useSWR, { mutate } from "swr";
 import Layout from "./layout/MenuLayout";
 import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 
 const Home = () => {
   const router = useRouter();
+
+  const MySwal = withReactContent(Swal)
 
   const { data: user, error: userError } = useSWR('/api/user');
 
   const { data: tweet, error: tweetError, mutate: tweetMutate } = useSWR(`/api/tweet`);
 
   const handleTweetClick = (id: number) => {
-    console.log(id)
       router.push(`/tweet/${id}`)
   }
 
@@ -33,12 +37,14 @@ const Home = () => {
 
   const clickLike = async (e) => {
 
-    console.log(e.target)
-    console.log(e.target.id)
 
     if (!tweet) return;
 
     await requestUpdate(e.target.id)
+
+    MySwal.fire({
+      title: tweet.tweets.find((tweet) => tweet.id == e.target.id).isLiked ? '좋아요를 취소했습니다.' : '좋아요를 눌렀습니다.',
+    })
     
     mutate('/api/tweet')  
   }
