@@ -64,7 +64,7 @@ const ProfilePage = () => {
         <Layout />
         <div className="border-r-2 border-gray overflow-scroll scrollbar-hide border-b-2">
           <div className="relative  font-Mynerve">
-            <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24">{user.user.name.toUpperCase()}</h1>  
+            <h1 className="font-bold text-2xl p-4 sticky top-0 z-10 bg-white/30 backdrop-blur-sm h-24">{user?.user.name.toUpperCase()}</h1>  
             <div className="w-full h-40 bg-gray-200 "></div>     
             <div className="h-32 w-32 bg-orange-200 bg-[url('https://nomadcoders.co/m.svg')] bg-cover rounded-full -mt-16 ml-4 border-2 border-white"></div>       
             <div>
@@ -77,11 +77,11 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-4 ">
-            <div className="font-bold text-xl  font-Mynerve">{user.user.name.toUpperCase()}</div>
-            <div className="text-sm text-gray-600 font-Mynerve">{user.user.email.toUpperCase()}</div>
+            <div className="font-bold text-xl  font-Mynerve">{user?.user.name.toUpperCase()}</div>
+            <div className="text-sm text-gray-600 font-Mynerve">{user?.user.email.toUpperCase()}</div>
             {
               tweet && tweet.tweets.map((tweet) => (
-                tweet.authorId === user.user.name && (
+                tweet.authorId === user?.user.name && (
                   <div className="flex flex-col border-t-2 border-b-2 border-gray-100">
                   <div className="flex p-8 items-center" >
                     <div className="w-12 h-12 bg-[url('https://nomadcoders.co/m.svg')] bg-orange-200 bg-cover rounded-full border-2 border-white" ></div>
