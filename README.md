@@ -3,4 +3,4 @@
 ### 아래 링크에서 결과물 확인해주시면 감사하겠습니다;;
 [Mini Twitter_1](http://apresmidi.cloud:3000/)
 
-[Mini Twitter_2](220.119.73.171:3000/)
+[Mini Twitter_2](http://220.119.73.171:3000/)
