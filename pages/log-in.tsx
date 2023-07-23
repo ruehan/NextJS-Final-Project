@@ -20,8 +20,10 @@ const LogInPage = () => {
     });
 
     if (response.ok) {
+      alert("로그인 성공")
       router.push('/');
     } else {
+      alert("아이디 또는 비밀번호 오류")
       console.error('Failed to log in');
     }
   };

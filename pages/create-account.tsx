@@ -8,6 +8,8 @@ const CreateAccountPage = () => {
   const [email, setEmail] = useState('');
   const router = useRouter();
 
+  
+
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -22,8 +24,10 @@ const CreateAccountPage = () => {
     });
 
     if (response.ok) {
+      alert("회원가입 성공")
       router.push('/log-in');
     } else {
+      alert("아이디 또는 이메일이 이미 존재합니다.")
       console.error('Failed to create account');
     }
   };
@@ -33,6 +37,9 @@ const CreateAccountPage = () => {
   };
 
   return (
+    <>
+    
+
     <div className="w-full h-screen grid grid-cols-2">
         <div className="bg-[url('https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png')]"></div>
         <div className="flex flex-col w-full h-screen justify-center p-8">
@@ -84,6 +91,7 @@ const CreateAccountPage = () => {
         </div>
         
     </div>
+    </>
   );
 };
 
