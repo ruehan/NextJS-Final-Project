@@ -26,7 +26,7 @@ const TweetPage = () => {
     return <div>Error fetching tweet</div>;
   }
 
-  function unix_timestamp(t: string){  
+  function unix_timestamp(t){  
     return moment(t).format('YYYY-MM-DD HH:mm:ss')
   }
 
@@ -68,7 +68,7 @@ const TweetPage = () => {
                   
                 </div>
                 <div className="pl-8 pr-8 pb-8">
-                {tweet.tweet.content.split("\n").map((line: string) => (
+                {tweet.tweet.content.split("\n").map((line) => (
                     <span className="z-0 font-Mugung text-2xl font-bold">
                     {line}
                     <br />
@@ -94,7 +94,7 @@ const TweetPage = () => {
               className="w-2/12 h-12 mt-4 rounded-3xl bg-blue-300 font-bold text-white mb-4"
             />
           </div>
-          {replies.reply.map((reply: any) => (
+          {replies.reply.map((reply) => (
             <div className="flex flex-col border-t-2 border-b-2 border-gray-100">
                 <div className="flex p-8 items-center" >
                   <div className="w-12 h-12 bg-[url('https://nomadcoders.co/m.svg')] bg-orange-200 bg-cover rounded-full border-2 border-white" ></div>
