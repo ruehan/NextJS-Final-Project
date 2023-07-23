@@ -41,7 +41,13 @@ const ProfilePage = () => {
     console.log(e.target)
     console.log(e.target.id)
 
-    if (!tweet) return;
+    if (!tweet) {
+      return <div>Loading...</div>;
+    }
+
+    if (!user) {
+      return <div>Loading...</div>;
+    }
 
     await requestUpdate(e.target.id)
     
