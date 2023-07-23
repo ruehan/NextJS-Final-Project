@@ -78,12 +78,20 @@ const Home = () => {
                   <div className="font-bold ml-4">{tweet.authorId}</div>
                   <div className="text-gray-400 text-sm ml-4" >{unix_timestamp(tweet.createdAt)}</div>
                 </div>
-                <div className="pl-8 pr-8 pb-8 hover:bg-gray:100 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
+                <div className="white-space: pre-wrap; pl-8 pr-8 pb-8 hover:bg-gray:100 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>
+                  {tweet.content.split("\n").map((line: string) => (
+                    <span>
+                    {line}
+                    <br />
+                  </span>
+                  ))
+                  }
+                </div>
                 <div className="relative flex">
                   <div className="absolute w-12 h-12 left-8 bottom-2 z-30 " onClick={clickLike} id={tweet.id}></div>
                   {tweet.isLiked ? <AiFillHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer z-0" /> :
                   <AiOutlineHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer z-0" />}
-                  <div className="ml-4 text-gray-500">{tweet.likedUser.join(", ")}</div>
+                  <div className="ml-4 text-gray-500">{tweet.likedUser.length > 1 ? tweet.likedUser.join(", ") : tweet.likedUser}</div>
                 </div>
               </div>
             ))}
