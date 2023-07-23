@@ -73,20 +73,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   )
 
-  likesData.map((like) => {
-    for(i = 0; i < tweets.length; i++){
-      if(like.tweetId === tweets[i].id){
-        if(like.isLiked === true){
-          likedUser.push(like.name)
-          
+  let object = {}
+
+  let data = []
+
+  console.log(tweets)
+
+  tweets.map((tweet) => {
+    for(i = 0; i < likesData.length; i++){
+      if(tweet.id === likesData[i].tweetId){
+        if(likesData[i].isLiked === true){
+          data.push(likesData[i].name)
         }
       }
-      tweets[i]['likedUser'] = likedUser
     }
+    tweet['likedUser'] = data
+    data = []
   }
   )
-
-  // console.log(tweets)
 
   res.status(200).json({ message: "find tweets", tweets });
 
