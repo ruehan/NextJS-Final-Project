@@ -76,7 +76,16 @@ const ProfilePage = () => {
                     <div className="font-bold ml-4">{tweet.authorId}</div>
                     <div className="text-gray-400 text-sm ml-4" >{unix_timestamp(tweet.createdAt)}</div>
                   </div>
-                  <div className="pl-8 pr-8 pb-8 hover:bg-gray:100 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
+                  <div className="white-space: pre-wrap; pl-8 pr-8 pb-8 hover:bg-gray:100  relative"  >
+                  <div className="w-full z-30 absolute opacity-0 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
+                  {tweet.content.split("\n").map((line: string) => (
+                    <span className="z-0">
+                    {line}
+                    <br />
+                  </span>
+                  ))
+                  }
+                </div>
                   <div className="relative flex">
                     <div className="absolute w-12 h-12 left-8 bottom-2 z-30 "  onClick={clickLike} id={tweet.id}></div>
                     {tweet.isLiked ? <AiFillHeart className="ml-8 mb-4 w-8 h-8 z-30 text-red-500 cursor-pointer" /> :

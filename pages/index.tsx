@@ -13,6 +13,7 @@ const Home = () => {
   const { data: tweet, error: tweetError, mutate: tweetMutate } = useSWR(`/api/tweet`);
 
   const handleTweetClick = (id: number) => {
+    console.log(id)
       router.push(`/tweet/${id}`)
   }
 
@@ -78,9 +79,10 @@ const Home = () => {
                   <div className="font-bold ml-4">{tweet.authorId}</div>
                   <div className="text-gray-400 text-sm ml-4" >{unix_timestamp(tweet.createdAt)}</div>
                 </div>
-                <div className="white-space: pre-wrap; pl-8 pr-8 pb-8 hover:bg-gray:100 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>
+                <div className="white-space: pre-wrap; pl-8 pr-8 pb-8 hover:bg-gray:100  relative"  >
+                  <div className="w-full z-30 absolute opacity-0 cursor-pointer" id={tweet.id} onClick={e => handleTweetClick(e.target.id)}>{tweet.content}</div>
                   {tweet.content.split("\n").map((line: string) => (
-                    <span>
+                    <span className="z-0">
                     {line}
                     <br />
                   </span>

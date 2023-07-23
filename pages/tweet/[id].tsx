@@ -61,7 +61,15 @@ const TweetPage = () => {
                   <div className="text-gray-400 text-sm ml-4" >{unix_timestamp(tweet.tweet.createdAt)}</div>
                   
                 </div>
-                <div className="pl-8 pr-8 pb-8">{tweet.tweet.content}</div>
+                <div className="pl-8 pr-8 pb-8">
+                {tweet.tweet.content.split("\n").map((line: string) => (
+                    <span className="z-0">
+                    {line}
+                    <br />
+                  </span>
+                  ))
+                  }
+                </div>
             </div>
           </div>
           <div className="w-full h-16 border-b-2 border-gray-100 flex items-center">
@@ -97,6 +105,5 @@ const TweetPage = () => {
       </div>
     </>
   );
-};
-
+}
 export default TweetPage;
